@@ -1,37 +1,45 @@
 class SmartCalculator {
-  constructor(initialValue) {
-    this.initialValue = initialValue;
-  }
+    constructor(initialValue) {
+        this.value = initialValue.toString();
+        this.expression = "";
+        this.valueUsed = false;
+    }
 
-  add(number) {
-    this.initialValue += number;
-    return this;
-  }
-  
-  subtract(number) {
-    this.initialValue -= number;
-    return this;
-  }
+    add(operand) {
+        this.expression += `${this.useExpOrValue(operand)} + ${operand}`;
+        return this;
+    }
 
-  multiply(number) {
-    this.initialValue *= number;
-    return this;
-  }
+    subtract(operand){
+        this.expression += `${this.useExpOrValue(operand)} - ${operand}`;
+        return this;
+    }
 
-  devide(number) {
-    this.initialValue /= number;
-    return this;
-  }
+    multiply(operand) {
+        this.expression += `${this.useExpOrValue(operand)} * ${operand}`;
+        return this;
+    }
 
-  pow(number) {
-    this.initialValue = Math.pow(this.initialValue, number);
-    return this;
-  }
+    devide(operand){
+        this.expression += `${this.useExpOrValue(operand)} / ${operand}`;
+        return this;
+    }
 
-  toString () { 
-  return this.initialValue; 
+    pow(operand){
+        this.expression += `${this.useExpOrValue(operand)} ** ${operand}`;
+        return this;
+    }
+
+    useExpOrValue(operand) {
+        let res = !this.valueUsed ? this.value : "";
+        this.valueUsed = true;
+        return res;
+    }
+
+    toString() {
+        return eval(this.expression);
+    }
 }
 
-}
 
 module.exports = SmartCalculator;
