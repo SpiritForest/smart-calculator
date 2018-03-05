@@ -1,67 +1,37 @@
 class SmartCalculator {
-  constructor(initValue) {
-    this.init = initValue;
-    this.operations = [];
+  constructor(initialValue) {
+    this.initialValue = initialValue;
   }
-  get result() {
-    let rpn = [this.init]; // reverse polish notation
-    let ops = [];
 
-    this.operations.forEach(op => { // сортировочная станция
-      while (ops.length && (ops[ops.length - 1]).priority < op.priority) {
-        rpn.push(ops.pop().op);
-      }
-      ops.push(op);
-      rpn.push(op.val);
-    });
-    while (ops.length) {
-      rpn.push(ops.pop().op)
-    }
-    let res = [];
-    rpn.forEach(token => {
-      if (typeof token === 'function') {
-        res.push(token(res.pop(), res.pop()));
-      } else {
-        res.push(token);
-      }
-    });
-    return res.pop();
-  }
-  add(val) {
-    this.operations.push({
-      op: (a, b) => a + b,
-      priority: 2,
-      val: val
-    });
+  add(number) {
+    this.initialValue += number;
     return this;
   }
-  substract(val) {
-    this.operations.push({
-      op: (a, b) => b - a,
-      priority: 2,
-      val: val
-    })
+  
+  subtract(number) {
+    this.initialValue -= number;
     return this;
   }
-  multiply(val) {
-    this.operations.push({
-      op: (a, b) => a * b,
-      priority: 1,
-      val: val
-    })
+
+  multiply(number) {
+    this.initialValue *= number;
     return this;
   }
-  divide(val) {
-    this.operations.push({
-      op: (a, b) => b / a,
-      priority: 1,
-      val: val
-    })
+
+  devide(number) {
+    this.initialValue /= number;
     return this;
   }
-  valueOf() {
-    return this.result;
+
+  pow(number) {
+    this.initialValue = Math.pow(this.initialValue, number);
+    return this;
   }
+
+  toString () { 
+  return this.initialValue; 
+}
+
 }
 
 module.exports = SmartCalculator;
