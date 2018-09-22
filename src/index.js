@@ -1,39 +1,31 @@
 class SmartCalculator {
     constructor(initialValue) {
-        this.value = initialValue.toString();
-        this.expression = "";
-        this.valueUsed = false;
+        this.expression = "" + initialValue;
     }
 
     add(operand) {
-        this.expression += `${this.useExpOrValue(operand)} + ${operand}`;
+        this.expression += '+' + operand;
         return this;
     }
 
     subtract(operand){
-        this.expression += `${this.useExpOrValue(operand)} - ${operand}`;
+        this.expression += '-' + operand;
         return this;
     }
 
     multiply(operand) {
-        this.expression += `${this.useExpOrValue(operand)} * ${operand}`;
+        this.expression += '*' + operand;
         return this;
     }
 
     devide(operand){
-        this.expression += `${this.useExpOrValue(operand)} / ${operand}`;
+        this.expression += '/' + operand;
         return this;
     }
 
     pow(operand){
-        this.expression += `${this.useExpOrValue(operand)} ** ${operand}`;
+        this.expression += '**' + operand;
         return this;
-    }
-
-    useExpOrValue(operand) {
-        let res = !this.valueUsed ? this.value : "";
-        this.valueUsed = true;
-        return res;
     }
 
     toString() {
